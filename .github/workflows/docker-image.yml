@@ -34,10 +34,10 @@ jobs:
     steps:
       - name: Set up SSH key
         run: |
-          mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 666 ~/.ssh/id_rsa
-          ssh-keyscan -t rsa ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
+           ssh-keygen -t rsa
+           ssh-copy-id ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
+           ssh-keyscan -t rsa ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
+           chmod 644 ~/.ssh/known_hosts
+
       - name: Connect to remote machine and execute command
         run: ssh -i ~/.ssh/id_rsa ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cat /home/milindsurya34/reactshop/reactshop/Dockerfile'
