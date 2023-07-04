@@ -32,8 +32,9 @@ jobs:
   deployment:
     needs: build-and-deploy
     runs-on: self-hostedi
+    
     env:
-      PREVIOUS_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER - 1 }}
+      PREVIOUS_RUN_NUMBER: ${{ github.run_number }} - 1
 
     steps:
       - name: Log in to Docker Hub
