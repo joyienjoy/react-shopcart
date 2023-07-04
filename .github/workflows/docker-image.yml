@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
@@ -27,17 +27,18 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: joydeep2022/reactjs-shopcart:${{ github.run_number }}
-
-  deploy-remote:
-    needs: build-and-deploy
-    runs-on: ubuntu-latest
+  
+  deployment:
+    runs-on: self-hosted
     steps:
-      - name: Set up SSH key
-        run: |
-           ssh-keygen -t rsa -N "" -f /root/.ssh/id_rsa
-           ssh-copy-id ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
-           ssh-keyscan -t rsa ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
-           chmod 644 ~/.ssh/known_hosts
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Connect to remote machine and execute command
-        run: ssh -i ~/.ssh/id_rsa ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cat /home/ubuntu/react-shopcart/Dockerfile'
+      - name: Pull Docker image from Docker Hub
+        run: docker pull joydeep2022/reactjs-shopcart:${{ github.run_number }}
+
+      - name: Run Docker container
+        run: docker run -d -p 3000:3000 joydeep2022/reactjs-shopcart:${{ github.run_number }}
