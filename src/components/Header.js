@@ -15,7 +15,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.logo}>
         <Link to="/">
-          <h2>JOYIENJOY STORE</h2>
+          <h2>AUTHORITY PROP STORE</h2>
         </Link>
       </div>
       <div className={styles.navContainer}>

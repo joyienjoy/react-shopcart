@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <p>
-	  <GetIcon icon="BsFillHeartFill" size={22} color="#da0037" /> <a href="https://github.com/joyienjoy/react-shopcart.git">Joyienjoy</a>
+        <GetIcon icon="BsFillHeartFill" size={22} color="#da0037" /> <a href="https://github.com/joyienjoy/react-shopcart.git">Authority INC</a>
       </p>
     </footer>
   );
