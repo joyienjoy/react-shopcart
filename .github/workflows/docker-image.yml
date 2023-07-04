@@ -34,7 +34,7 @@ jobs:
     runs-on: self-hostedi
     
     env:
-      PREVIOUS_RUN_NUMBER: ${{ github.run_number }} - 1
+      LAST_RUN_NUMBER: ${{ github.run_number - 1}}
 
     steps:
       - name: Log in to Docker Hub
