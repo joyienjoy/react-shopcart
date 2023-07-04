@@ -3,3 +3,5 @@
 sudo ./svc.sh stop
 
 sudo ./svc.sh start
+
+sudo chmod 666 /var/run/docker.sock
