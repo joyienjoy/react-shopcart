@@ -32,10 +32,6 @@ jobs:
   deployment:
     needs: build-and-deploy
     runs-on: self-hostedi
-    
-    env:
-      PREVIOUS_RUN_NUMBER: ${{ github.run_number - 1}}
-
     steps:
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
@@ -45,9 +41,8 @@ jobs:
 
       - name: Cleanup
         run: |
-          docker container stop $(docker container ls -a -q --filter ancestor=joydeep2022/reactjs-shopcart:${{ env.PREVIOUS_RUN_NUMBER })
-          docker container stop $(docker container ls -a -q --filter ancestor=joydeep2022/reactjs-shopcart:${{ env.PREVIOUS_RUN_NUMBER })
-         
+          docker stop $(docker ps -aq)
+          docker rm $(docker ps -aq)
 
       - name: Pull Docker image from Docker Hub
         run: docker pull joydeep2022/reactjs-shopcart:${{ github.run_number }}
