@@ -40,4 +40,4 @@ jobs:
            chmod 644 ~/.ssh/known_hosts
 
       - name: Connect to remote machine and execute command
-        run: ssh -i ~/.ssh/id_rsa ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cat /home/milindsurya34/reactshop/reactshop/Dockerfile'
+        run: ssh -i ~/.ssh/id_rsa ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} 'cat /home/ubuntu/react-shopcart/Dockerfile'
