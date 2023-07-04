@@ -19,5 +19,8 @@ $ tar xzf ./actions-runner-linux-x64-2.305.0.tar.gz
 # Create the runner and start the configuration experience
 $ ./config.sh --url https://github.com/joyienjoy/react-shopcart --token AV6RLKA6YOEYTUVE75WN2JLEUQGGG# 
 
-#Last step, run it!
-$ sudo /.svc.sh install
+#Last step, run it
+
+$ sudo ./svc.sh install
+$ sudo ./svc.sh stop
+$ sudo ./svc.sh start
